@@ -4,30 +4,32 @@
     <meta charset="UTF-8">
     <title>Hospital Militar</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
     <div class="container">
         <h1>Medicamentos de alto costo</h1>
         <div class="row">
-            <!--div class="col-md-4 col-12">
-                Flask is a lightweight WSGI web application framework. It is designed to make getting started quick and easy, with the ability to scale up to complex applications. It began as a simple wrapper around Werkzeug and Jinja and has become one of the most popular Python web application frameworks.
-            </div-->
             <!-- On small screens fills the full grid, on medium+ ones only half -->
-		<div class="col-xs-12 col-md-4">
-			<h2>Pacientes atentidos por año</h2>
-			<div class="barChart" id="cardYears"></div>
-		</div>
-        <div class="col-xs-12 col-md-4">
-			<h2>Pacientes atentidos por mes</h2>
-			<div class="barChart" id="cardMonth"></div>
-		</div>
-        <div class="col-xs-12 col-md-4">
-			<h2>Pacientes atendidos por genero</h2>
-			<div class="barChart" id="cardGenders"></div>
-		</div>
-
-
+            <div class="col-xs-12 col-md-6">
+                <h2>Pacientes atentidos por año</h2>
+                <div class="barChart" id="cardYears"></div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <h2>Pacientes atentidos por mes</h2>
+                <div class="barChart" id="cardMonth"></div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- On small screens fills the full grid, on medium+ ones only half -->
+            <div class="col-xs-12 col-md-6">
+                <h2>Pacientes atendidos por genero</h2>
+                <div class="barChart" id="cardGenders"></div>
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <h2>Pacientes atendidos por grupo etario</h2>
+                <div class="barChart" id="cardAge"></div>
+            </div>
         </div>
 
     </div>

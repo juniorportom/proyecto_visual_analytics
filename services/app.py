@@ -34,7 +34,35 @@ def get_gender_data():
             'cast(Anio_Prescripcion as NUMERIC) Anio_Prescripcion, ' +
             'cast(Mes_Prescripcion as NUMERIC) Mes_Prescripcion, ' +
             'Numero_Documento paciente, ' +
-            'cast(Valor_Medio as decimal (14,2)) valor ' +
+            'cast(Valor_Medio as decimal (14,2)) valor, ' +
+            'case ' +
+            'when (julianday() - julianday(Fecha_Nacimiento_amd)) / 365 <= 5 ' +
+            'then ' +
+            '\'Primera Incancia\' ' +
+            'when(julianday() - julianday(Fecha_Nacimiento_amd)) / 365 ' +
+            'BETWEEN ' +
+            '6 and 11 ' +
+            'then ' +
+            '\'Infancia\' ' +
+            'when(julianday() - julianday(Fecha_Nacimiento_amd)) / 365 ' +
+            'BETWEEN ' +
+            '12 and 18 ' +
+            'then ' +
+            '\'Adolecencia\' ' +
+            'when(julianday() - julianday(Fecha_Nacimiento_amd)) / 365 ' +
+            'BETWEEN ' +
+            '19 and 26 ' +
+            'then ' +
+            '\'Juventud\' ' +
+            'when(julianday() - julianday(Fecha_Nacimiento_amd)) / 365 ' +
+            'BETWEEN ' +
+            '27 and 59 ' +
+            'then ' +
+            '\'Adultez\' ' +
+            'else ' +
+            '\'Adulto Mayor\' ' +
+            'end ' +
+            'grupo_etario ' +
         'from MDCMNTS_PCNTS_LTCST;')
     return execute_query(query)
 
