@@ -325,7 +325,7 @@ $(document).ready(function () {
             .style('cursor', 'all-scroll')
             .attr('width', previewWidth)
             .attr('height', previewHeight)
-            .attr('fill', 'rgba(250, 235, 215, 0.78)')
+            .attr('fill', 'rgba(255, 255, 000, 0.3)')
             .call(d3.drag().on('drag', dragged));
 
         redrawChart();
