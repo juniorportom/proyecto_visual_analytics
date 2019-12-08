@@ -16,13 +16,14 @@ def home():
 @app.route('/categories-data')
 def get_categories_data():
     query = ('select ' +
-            'Categoria_Medicamento, ' +
-            'Fecha_Prescipcion_amd, ' +
-            'sum(cast(Valor_Medio as decimal (14,2))) valor_dia, ' +
+            'Id_Categoria as regionId, ' +
+            'Categoria_Medicamento as regionName, ' +
+            'Fecha_Prescipcion_amd as date, ' +
+            'sum(cast(Valor_Medio as decimal (14,0))) percent, ' +
             'COUNT(Numero_Documento) pacientes ' +
         'from MDCMNTS_PCNTS_LTCST ' +
-        'group by Categoria_Medicamento, Fecha_Prescipcion_amd ' +
-        'order by Fecha_Prescipcion_amd;')
+        'group by Id_Categoria, Fecha_Prescipcion_amd ' +
+        'order by Id_Categoria;')
 
     return execute_query(query)
 
