@@ -95,7 +95,7 @@
                 <h5 class="my-0 font-weight-normal">Pacientes atendidos por Año</h5>
             </div>
             <div class="card-body">
-                 <div class="barChart w-100" id="cardYears"></div>
+                <div class="barChart w-100" id="cardYears"></div>
             </div>
         </div>
         <div class="card mb-6 shadow-sm">
@@ -103,7 +103,7 @@
                 <h5 class="my-0 font-weight-normal">Pacientes atendidos por Mes</h5>
             </div>
             <div class="card-body">
-                 <div class="barChart" id="cardMonth"></div>
+                <div class="barChart" id="cardMonth"></div>
             </div>
         </div>
     </div>
@@ -113,7 +113,7 @@
                 <h5 class="my-0 font-weight-normal">Pacientes atendidos por Género</h5>
             </div>
             <div class="card-body">
-                 <div class="barChart" id="cardGenders"></div>
+                <div class="barChart" id="cardGenders"></div>
             </div>
         </div>
         <div class="card mb-6 shadow-sm">
@@ -121,41 +121,52 @@
                 <h5 class="my-0 font-weight-normal">Pacientes atendidos por Grupo Etario</h5>
             </div>
             <div class="card-body">
-                 <div class="barChart" id="cardAge"></div>
+                <div class="barChart" id="cardAge"></div>
+            </div>
+        </div>
+    </div>
+    <div class="card-deck mb-3 text-center">
+        <div class="card mb-12 shadow-sm">
+            <div class="card-header">
+                <h5 class="my-0 font-weight-normal">Condiciones de Búsqueda y Agrupamiento</h5>
+            </div>
+            <div class="card-body">
+                <div class="col-md-12 mb-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inHierarchy">Campos a Agrupar:</label>
+                        </div>
+                        <select id="inHierarchy" class="colSelect w-75" name="apps" multiple="multiple">
+                            <option value="Anio_Prescripcion" selected>Año Prescripción</option>
+                            <option value="Categoria_Medicamento">Categoría Medicamento</option>
+                            <option value="Cod_Diagnostico">Código Diagnóstico</option>
+                            <option value="Codigo_Cedicamento">Código Medicamento</option>
+                            <option value="Codigo_Laboratorio">Código Laboratorio</option>
+                            <option value="Numero_Documento">Documento Paciente</option>
+                            <option value="Fuerza">Fuerza</option>
+                            <option value="Medicamento">Medicamento</option>
+                            <option value="Nombre_Medico">Médico</option>
+                            <option value="Mes_Prescripcion">Mes Prescripción</option>
+                            <option value="Nombre_Diag">Nombre Diagnóstico</option>
+                            <option value="Nombre_Paciente">Paciente</option>
+                            <option value="Sexo">Sexo</option>
+                            <option value="Tipo_Consulta">Tipo Consulta</option>
+                            <option value="Tipo_Ing">Tipo Ingreso</option>
+                        </select>
+                        <div class="input-group-append">
+                            <button id="btnSubmit" class="btn btn-primary">Consultar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="treemap-chart"></div>
             </div>
         </div>
     </div>
 
 
-<div class="row">
-    <div class="col-12">
-        <h1>Condiciones de busqueda y agrupamiento</h1>
-        <!--label>Hierarchy <input id="inHierarchy" value="Categoria_Medicamento" class="form-control"
-        /></label-->
-        <label>Campos a agrupar</label>
-        <select id="inHierarchy" class="colSelect w-100" name="apps" multiple="multiple">
-            <option value="Anio_Prescripcion">Año Prescripción</option>
-            <option value="Categoria_Medicamento" selected>Categoria Medicamento</option>
-            <option value="Cod_Diagnostico">Código Diagnostico</option>
-            <option value="Codigo_Cedicamento">Código Medicmanto</option>
-            <option value="Codigo_Laboratorio">Código Laboratorio</option>
-            <option value="Numero_Documento">Documento Paciente</option>
-            <option value="Fuerza">Fuerza</option>
-            <option value="Medicamento">Medicamento</option>
-            <option value="Nombre_Medico">Medico</option>
-            <option value="Mes_Prescripcion">Mes Prescripción</option>
-            <option value="Nombre_Diag">Nombre Diagnostico</option>
-            <option value="Nombre_Paciente">Paciente</option>
-            <option value="Sexo">Sexo</option>
-            <option value="Tipo_Consulta">Tipo Consulta</option>
-            <option value="Tipo_Ing">Tipo Ingreso</option>
-        </select>
-        <button id="btnSubmit" class="btn btn-primary">Submit</button>
-    </div>
-</div>
-
     <div class="row">
-    <div class="col-12" id="chart"></div>
+        <div class="col-12" id="chart"></div>
     </div>
 
 </div>

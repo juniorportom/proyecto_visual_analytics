@@ -39,7 +39,7 @@ def get_gender_data():
             'case ' +
             'when (julianday() - julianday(Fecha_Nacimiento_amd)) / 365 <= 5 ' +
             'then ' +
-            '\'Primera Incancia\' ' +
+            '\'Primera Infancia\' ' +
             'when(julianday() - julianday(Fecha_Nacimiento_amd)) / 365 ' +
             'BETWEEN ' +
             '6 and 11 ' +
@@ -71,14 +71,14 @@ def get_gender_data():
 
 @app.route('/hierarchy-data')
 def hierarchy_data():
-    hierarchyList = request.args.get("hierarchy", "Categoria_Medicamento, Medicamento").split(",")
+    hierarchyList = request.args.get("hierarchy").split(",")
     hierarchy = ",".join(['"%s"' % x for x in hierarchyList])
-    print('lista: ' + str(hierarchyList))
-    print(hierarchy)
+    #print('lista: ' + str(hierarchyList))
+    #print(hierarchy)
 
     query = "select %s, sum(Valor_Medio) count from MDCMNTS_PCNTS_LTCST group by %s;" % (hierarchy, hierarchy)
 
-    print(query)
+    #print(query)
 
     return execute_query(query)
 

@@ -105,8 +105,8 @@ d3.csv('/gender-data')
         const treeData = createHierarchy(hierarchyData, hierarchy);
         const myTEle = myTreemap(900, treeData);
 
-        d3.select("#chart").html("");
-        d3.select("#chart")
+        d3.select("#treemap-chart").html("");
+        d3.select("#treemap-chart")
           .node()
           .appendChild(myTEle);
       });
