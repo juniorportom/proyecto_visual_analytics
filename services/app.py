@@ -1,4 +1,4 @@
-from flask import Flask, make_response, render_template
+from flask import Flask, make_response, render_template, request
 import sqlite3
 import io
 import csv
@@ -64,6 +64,21 @@ def get_gender_data():
             'end ' +
             'grupo_etario ' +
         'from MDCMNTS_PCNTS_LTCST;')
+
+    return execute_query(query)
+
+
+@app.route('/hierarchy-data')
+def hierarchy_data():
+    hierarchyList = request.args.get("hierarchy", "Categoria_Medicamento, Medicamento").split(",")
+    hierarchy = ",".join(['"%s"' % x for x in hierarchyList])
+    print('lista: ' + str(hierarchyList))
+    print(hierarchy)
+
+    query = "select %s, sum(Valor_Medio) count from MDCMNTS_PCNTS_LTCST group by %s;" % (hierarchy, hierarchy)
+
+    print(query)
+
     return execute_query(query)
 
 

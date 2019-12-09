@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Hospital Militar</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/select2/css/select2.min.css">
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
@@ -31,8 +32,41 @@
                 <div class="barChart" id="cardAge"></div>
             </div>
         </div>
-
     </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1>Condiciones de busqueda y agrupamiento</h1>
+          <!--label>Hierarchy <input id="inHierarchy" value="Categoria_Medicamento" class="form-control"
+          /></label-->
+            <label>Campos a agrupar</label>
+            <select id="inHierarchy" class="colSelect w-100" name="apps" multiple="multiple" >
+               <option value="Anio_Prescripcion">Año Prescripción</option>
+                <option value="Categoria_Medicamento" selected>Categoria Medicamento</option>
+                <option value="Cod_Diagnostico">Código Diagnostico</option>
+                <option value="Codigo_Cedicamento">Código Medicmanto</option>
+                <option value="Codigo_Laboratorio">Código Laboratorio</option>
+                <option value="Numero_Documento">Documento Paciente</option>
+                <option value="Fuerza">Fuerza</option>
+                <option value="Medicamento">Medicamento</option>
+                <option value="Nombre_Medico">Medico</option>
+                <option value="Mes_Prescripcion">Mes Prescripción</option>
+                <option value="Nombre_Diag">Nombre Diagnostico</option>
+                <option value="Nombre_Paciente">Paciente</option>
+                <option value="Sexo">Sexo</option>
+                <option value="Tipo_Consulta">Tipo Consulta</option>
+                <option value="Tipo_Ing">Tipo Ingreso</option>
+                </select>
+          <button id="btnSubmit" class="btn btn-primary">Submit</button>
+        </div>
+          </div>
+        <br><br>
+          <div class="row">
+
+        <div class="col-12" id="chart"></div>
+      </div>
+    </div>
+    <br><br><br>
     <!-- Container-->
 
     <script
@@ -52,9 +86,17 @@
     ></script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crossfilter/1.3.12/crossfilter.js"></script>
+    <script src="/static/select2/js/select2.min.js"></script>
     <script src="/static/js/timeSeriesChart.js"></script>
     <script src="/static/js/barChart.js"></script>
+    <script src="/static/js/myTreemap.js"></script>
     <script src="/static/js/main.js"></script>
+    <script async>
+    $(document).ready(function() {
+    $('#inHierarchy').select2();
+  });
+</script>
+
 
 </body>
 </html>
