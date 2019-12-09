@@ -70,6 +70,7 @@ $(document).ready(function () {
             //.attr('height', height + margin.top + margin.bottom)
             .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
             .attr('preserveAspectRatio', 'xMinYMin')
+            .attr('class', 'linechart1')
             .append('g')
             .attr('transform', `translate(${margin.left},${margin.top})`);
 

@@ -15,19 +15,19 @@ html {
     max-width: 90%;
 }
 
-#chart-01 > .root {
+.root {
     display: flex;
 }
-#chart-01 > .axis text {
+.axis text {
     font-weight: bold;
 }
-#chart-01 > .y-axis text {
+.y-axis text {
     text-anchor: end;
 }
-#chart-01 > .axis path {
+.linechart1 > g > g.axis > path {
     display: none;
 }
-#chart-01 > .axis line {
+.axis line {
     stroke-opacity: 0.3;
 }
 .line {
