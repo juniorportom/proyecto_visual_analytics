@@ -17,6 +17,13 @@ function barChart() {
   function chart(selection) {
     selection.each(function (data) {
 
+        if(data.length === 12){
+            data = data.sort(function(x, y){
+                let a = Number(x.key), b =  Number(y.key);
+               return d3.ascending(a, b);
+            });
+        }
+
       // Select the svg element, if it exists.
       var svg = d3.select(this).selectAll("svg").data([data]);
 
@@ -40,20 +47,20 @@ function barChart() {
       xScale.rangeRound([0, innerWidth])
         .domain(data.map(xValue));
       yScale.rangeRound([innerHeight, 0])
-        .domain([0, d3.max(data, yValue)]);
+        .domain([0, d3.max(data, yValue)]).nice();
 
       g.select(".x.axis")
           .attr("transform", "translate(0," + innerHeight + ")")
           .call(d3.axisBottom(xScale));
 
       g.select(".y.axis")
-          .call(d3.axisLeft(yScale).ticks(10))
+          .call(d3.axisLeft(yScale).ticks(8))
         .append("text")
           .attr("transform", "rotate(-90)")
-          .attr("y", 6)
+          .attr("y", -58)
           .attr("dy", "0.71em")
-          .attr("text-anchor", "end")
-          .text("Frequency");
+          .text("Número de Pacientes")
+          .attr('fill', 'black');
 
       var bars = g.selectAll(".bar")
         .data(function (d) { return d; });
@@ -63,12 +70,32 @@ function barChart() {
         .merge(bars)
           .attr("x", X)
           .attr("y", Y)
+          .style('cursor', 'pointer')
           .attr("width", xScale.bandwidth())
           .attr("height", function(d) { return innerHeight - Y(d); })
           .on("mouseover", onMouseOver)
           .on("mouseout", onMouseOut);
 
       bars.exit().remove();
+
+      var text = g.selectAll(".text")
+        .data(function (d) { return d; });
+
+      text.enter().append("text")
+          .attr("class", "text")
+        .merge(text)
+          .attr("x", d => X(d) + xScale.bandwidth() / 2)
+          .attr("y", d => Y(d) - 3)
+          .text(d => d.value > 0 ? d.value : '')
+          .attr("text-anchor", "middle")
+          .attr("font-family", "sans-serif")
+          .attr("font-size", "11px")
+          .attr("fill", "black")
+          .style('cursor', 'pointer')
+          .on("mouseout", onMouseOut)
+          .on("mouseover", onMouseOver);
+      text.exit().remove();
+
     });
 
   }

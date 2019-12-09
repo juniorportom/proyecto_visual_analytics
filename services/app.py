@@ -39,7 +39,7 @@ def get_gender_data():
             'case ' +
             'when (julianday() - julianday(Fecha_Nacimiento_amd)) / 365 <= 5 ' +
             'then ' +
-            '\'Primera Infancia\' ' +
+            '\'P. Infancia\' ' +
             'when(julianday() - julianday(Fecha_Nacimiento_amd)) / 365 ' +
             'BETWEEN ' +
             '6 and 11 ' +
@@ -49,7 +49,7 @@ def get_gender_data():
             'BETWEEN ' +
             '12 and 18 ' +
             'then ' +
-            '\'Adolecencia\' ' +
+            '\'Adolescencia\' ' +
             'when(julianday() - julianday(Fecha_Nacimiento_amd)) / 365 ' +
             'BETWEEN ' +
             '19 and 26 ' +
