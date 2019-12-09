@@ -18,7 +18,6 @@ function myTreemap(width, treeData) {
         d => d.values
       )
       .eachBefore(d => {
-          console.log('valor de d', d);
         d.data.name = d.children ? d.data.key : d.data.Categoria_Medicamento;
         // d.data.name = d.data.name.toLowerCase();
         d.data.id = (d.parent ? d.parent.data.id + "." : "") + d.data.name;

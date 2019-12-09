@@ -1,27 +1,16 @@
 /* global d3, crossfilter, barChart, myTreemap */
 
-console.log("Downloading data");
 d3.csv('/gender-data')
     .then(data => {
-        console.log('Data loaded', data);
-
         const cs = crossfilter(data);
-
         const dimYear = cs.dimension(d => d['Anio_Prescripcion']);
         const dimGender = cs.dimension(d => d['Sexo']);
         const dimMonth = cs.dimension(d => d['Mes_Prescripcion']);
         const dimAge = cs.dimension(d => d['grupo_etario']);
-
         const groupYear = dimYear.group();
         const groupGender = dimGender.group();
         const groupMonth = dimMonth.group();
         const groupAge = dimAge.group();
-
-
-        console.log(groupYear.all());
-        console.log(groupGender.all());
-        console.log(groupMonth.all());
-        console.log(groupAge.all());
 
         const barYearType = barChart()
             .x(d=> d.key)
@@ -34,7 +23,6 @@ d3.csv('/gender-data')
                 dimYear.filterAll();
                 update();
             });
-
 
         const barGenderType = barChart()
             .x(d=> d.key)
@@ -72,7 +60,6 @@ d3.csv('/gender-data')
                 update();
             });
 
-
         function update(){
             d3.select('#cardYears')
             .data([groupYear.all()])
@@ -91,19 +78,6 @@ d3.csv('/gender-data')
             .call(barAgeType);
         }
 
-        /*var rowtip = d3.tip()
-    .attr('rect', 'd3-tip')
-    .offset([-10, 0])
-    .html(function(d){return d.key;})
-
-$('body').on('mouseover', function(){
-
-    d3.selectAll('g.row')
-        .call(rowtip)
-        .on('mouseover', rowtip.show)
-        .on('mouseout', rowtip.hide);
-});*/
-
     function createHierarchy(hierarchyData, hierarchy) {
       const nest = d3.nest();
 
@@ -118,8 +92,6 @@ $('body').on('mouseover', function(){
       //let hierarchy = d3.select("#inHierarchy").property("value");
       let values = $('#inHierarchy').val();
 
-      console.log('datos jerar',values);
-
       try {
         //hierarchy = hierarchy.split(",");
         hierarchy = values;
@@ -127,15 +99,10 @@ $('body').on('mouseover', function(){
         hierarchy = [];
       }
 
-      const url =
-        "/hierarchy-data" + (hierarchy.length ? "?hierarchy=" + hierarchy.join(",") : "");
+      const url = "/hierarchy-data" + (hierarchy.length ? "?hierarchy=" + hierarchy.join(",") : "");
 
-      console.log("url", url);
       d3.csv(url).then(hierarchyData => {
         const treeData = createHierarchy(hierarchyData, hierarchy);
-        console.log("Data loaded", hierarchyData);
-        console.log("treedata", treeData);
-
         const myTEle = myTreemap(900, treeData);
 
         d3.select("#chart").html("");

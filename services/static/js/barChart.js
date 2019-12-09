@@ -1,15 +1,15 @@
 /* global d3 */
 
 function barChart() {
-
-  var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 400,
-    height = 400,
+  const container_b_1 = $('#cardYears');
+  var margin = {top: 20, right: 20, bottom: 30, left: 60},
+      width = container_b_1.width() - margin.left - margin.right,
+    height = 220 - margin.top - margin.bottom,
     innerWidth = width - margin.left - margin.right,
     innerHeight = height - margin.top - margin.bottom,
     xValue = function(d) { return d[0]; },
     yValue = function(d) { return d[1]; },
-    xScale = d3.scaleBand().padding(0.1),
+    xScale = d3.scaleBand().padding(0.5),
     yScale = d3.scaleLinear(),
     onMouseOver =  () => { },
     onMouseOut =  () => { };
@@ -36,7 +36,6 @@ function barChart() {
       // Update the inner dimensions.
       var g = svg.merge(svgEnter).select("g")
           .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
 
       xScale.rangeRound([0, innerWidth])
         .domain(data.map(xValue));
