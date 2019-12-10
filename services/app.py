@@ -1,4 +1,4 @@
-from flask import Flask, make_response, render_template, request
+from flask import Flask, make_response, render_template, request, send_file
 import sqlite3
 import io
 import csv
@@ -12,6 +12,9 @@ DATABASE_FILE = 'proyecto_hmc_2.db'
 def home():
     return render_template('index.html')
 
+@app.route('/usuario')
+def user():
+    return render_template('usuario.html')
 
 @app.route('/categories-data')
 def get_categories_data():
