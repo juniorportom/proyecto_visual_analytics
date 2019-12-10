@@ -77,14 +77,14 @@ svg.selectAll(".month")
     const regionsDiags = {};
 
     data.forEach(item => {
-      regionsNamesById[item.key] = item.values[0].Comparison_Type
-        regionsDiags
+      regionsNamesById[item.key] = item.values[0].Comparison_Type;
+        regionsDiags[item.key] = {diagnostico: item.values[0].Cod_Diagnostico + ' - ' + item.values[0].Nombre_Diag}
   });
     
 	
   rect.filter(function(d) {return d in regionsNamesById; })
       .attr("fill", function(d) { return color(regionsNamesById[d]); })
-	  .attr("data-title", function(d) { return "Fecha: " + format(new Date(d)) + " <br> Medicamento: "+ regionsNamesById[d]});
+	  .attr("data-title", function(d) { return "Fecha: <p>" + format(new Date(d)) + " </p> Medicamento: <p>"+ regionsNamesById[d] + "</p>Diagnóstico: <p>" + regionsDiags[d].diagnostico + "</p>"});
   $("rect").tooltip({container: 'body', html: true, placement:'auto'});
   
   let regionsIds = Object.values(regionsNamesById);
