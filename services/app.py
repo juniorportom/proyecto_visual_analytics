@@ -78,7 +78,23 @@ def hierarchy_data():
     #print('lista: ' + str(hierarchyList))
     #print(hierarchy)
 
-    query = "select %s, sum(Valor_Medio) count from MDCMNTS_PCNTS_LTCST group by %s;" % (hierarchy, hierarchy)
+    # query = "select %s, sum(Valor_Medio) count from MDCMNTS_PCNTS_LTCST group by %s;" % (hierarchy, hierarchy)
+
+    query = "select %s, sum(valor_medio) count from ( " \
+            "select *, " \
+            "case " \
+            "when cast((julianday() - julianday(Fecha_Nacimiento_amd)) / 365 as int) <= 5 " \
+            "then 'P. Infancia' " \
+            "when cast((julianday() - julianday(Fecha_Nacimiento_amd)) / 365 as int) BETWEEN 6 and 11 " \
+            "then 'Infancia' " \
+            "when cast((julianday() - julianday(Fecha_Nacimiento_amd)) / 365 as int) BETWEEN 12 and 18 " \
+            "then 'Adolescencia' " \
+            "when cast((julianday() - julianday(Fecha_Nacimiento_amd)) / 365 as int) BETWEEN 19 and 26 " \
+            "then 'Juventud' " \
+            "when cast((julianday() - julianday(Fecha_Nacimiento_amd)) / 365 as int) BETWEEN 27 and 59 " \
+            "then 'Adultez' " \
+            "else 'Adulto Mayor' end Grupo_Etario " \
+            "from MDCMNTS_PCNTS_LTCST a) v group by %s; " % (hierarchy, hierarchy)
 
     #print(query)
 
