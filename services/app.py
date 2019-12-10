@@ -37,25 +37,25 @@ def get_gender_data():
             'Numero_Documento paciente, ' +
             'cast(Valor_Medio as decimal (14,2)) valor, ' +
             'case ' +
-            'when (julianday() - julianday(Fecha_Nacimiento_amd)) / 365 <= 5 ' +
+            'when cast((julianday() - julianday(Fecha_Nacimiento_amd)) / 365 as int) <= 5 ' +
             'then ' +
             '\'P. Infancia\' ' +
-            'when(julianday() - julianday(Fecha_Nacimiento_amd)) / 365 ' +
+            'when cast((julianday() - julianday(Fecha_Nacimiento_amd)) / 365 as int)' +
             'BETWEEN ' +
             '6 and 11 ' +
             'then ' +
             '\'Infancia\' ' +
-            'when(julianday() - julianday(Fecha_Nacimiento_amd)) / 365 ' +
+            'when cast((julianday() - julianday(Fecha_Nacimiento_amd)) / 365 as int) ' +
             'BETWEEN ' +
             '12 and 18 ' +
             'then ' +
             '\'Adolescencia\' ' +
-            'when(julianday() - julianday(Fecha_Nacimiento_amd)) / 365 ' +
+            'when cast((julianday() - julianday(Fecha_Nacimiento_amd)) / 365 as int) ' +
             'BETWEEN ' +
             '19 and 26 ' +
             'then ' +
             '\'Juventud\' ' +
-            'when(julianday() - julianday(Fecha_Nacimiento_amd)) / 365 ' +
+            'when cast((julianday() - julianday(Fecha_Nacimiento_amd)) / 365 as int) ' +
             'BETWEEN ' +
             '27 and 59 ' +
             'then ' +
@@ -65,6 +65,8 @@ def get_gender_data():
             'end ' +
             'grupo_etario ' +
         'from MDCMNTS_PCNTS_LTCST;')
+
+    print(query)
 
     return execute_query(query)
 
