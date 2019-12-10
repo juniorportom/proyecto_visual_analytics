@@ -17,6 +17,11 @@ def home():
 def user():
     return render_template('usuario.html')
 
+@app.route('/personal-data')
+def personal_data():
+    query = ("SELECT MDCMNTS_PCNTS_LTCST.Fecha_Prescipcion_amd AS Date, MDCMNTS_PCNTS_LTCST.Medicamento AS Comparison_Type, MDCMNTS_PCNTS_LTCST.Cod_Diagnostico, MDCMNTS_PCNTS_LTCST.Nombre_Diag FROM MDCMNTS_PCNTS_LTCST WHERE MDCMNTS_PCNTS_LTCST.Numero_Documento = '1121926922' ORDER BY Date ASC")
+    return execute_query(query)
+
 
 @app.route('/categories-data')
 def get_categories_data():
