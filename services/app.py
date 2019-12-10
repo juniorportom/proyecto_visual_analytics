@@ -83,6 +83,24 @@ def hierarchy_data():
     return execute_query(query)
 
 
+@app.route('/laboratory-data.csv')
+def laboratory_data():
+
+    query = ("select " +
+            "fecha_prescipcion_amd 'date',  " +
+            "(sum(Valor_Medio))/1000  'precipitation',  " +
+            "(sum(Valor_Medio) + 1000)/1000 'emp_max', " +
+            "(sum(Valor_Medio) - 1000)/1000 'temp_min', " +
+            "count(Valor_Medio) 'wind', " +
+            "codigo_laboratorio 'weather'  " +
+        "from MDCMNTS_PCNTS_LTCST  " +
+        "where fecha_prescipcion_amd BETWEEN '2018/01/01' and '2018/12/31' " +
+        "group by fecha_prescipcion_amd, codigo_laboratorio " +
+        "order by Fecha_Prescipcion_amd limit 500;")
+
+    return execute_query(query)
+
+
 def execute_query(query):
     conn = sqlite3.connect(DATABASE_FILE)
     cursor = conn.cursor()
