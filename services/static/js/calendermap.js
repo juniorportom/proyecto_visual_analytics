@@ -74,26 +74,29 @@ svg.selectAll(".month")
     .entries(csv);
 
     const regionsNamesById = {};
+    const regionsDiags = {};
 
     data.forEach(item => {
       regionsNamesById[item.key] = item.values[0].Comparison_Type
+        regionsDiags
   });
     
 	
   rect.filter(function(d) {return d in regionsNamesById; })
       .attr("fill", function(d) { return color(regionsNamesById[d]); })
-	  .attr("data-title", function(d) { return "Fecha: " + format(new Date(d)) + " <br> Medicamento: "+ regionsNamesById[d]});   
+	  .attr("data-title", function(d) { return "Fecha: " + format(new Date(d)) + " <br> Medicamento: "+ regionsNamesById[d]});
   $("rect").tooltip({container: 'body', html: true, placement:'auto'});
   
   let regionsIds = Object.values(regionsNamesById);
   regionsIds = regionsIds.filter((item, index) => regionsIds.indexOf(item) === index)
 
   var svgLegned4 = d3.select(".calender-map-legend").append("svg")
-            .attr("width", '50%')
+            .attr("width", '90%')
             .attr("height", height - 50)
         
-        var dataL = 10;
-        var offset = 90
+        var dataL = 0;
+        var offset = 120
+        var yC = 10
         
         var legend4 = svgLegned4.selectAll('.legends4')
             .data(regionsIds)
@@ -101,12 +104,16 @@ svg.selectAll(".month")
             .attr("class", "legends4")
             .attr("transform", function (d, i) {
              if (i === 0) {
-                dataL = d.length + offset 
+                dataL = d.length + offset
                 return "translate(0,10)"
-            } else { 
-             var newdataL = dataL
+            } else {
+                 if(i > 3){
+                     yC = 30;
+                 }
+                     var newdataL = dataL
+
              dataL +=  d.length + offset
-             return "translate(" + (newdataL) + ", 10)"
+             return "translate(" + (newdataL) + ", "+yC+")"
             }
         })
 
@@ -116,7 +123,7 @@ svg.selectAll(".month")
         .attr("width", 12)
         .attr("height", 12)
         .style("fill", function (d, i) {
-        return color(d)      
+        return color(d)
     })
 
     legend4.append('text')
@@ -131,7 +138,7 @@ svg.selectAll(".month")
             .style("font-size", '11px')
 
             svgLegned4.attr('transform', function() {
-              return `translate(${($('.calender-map').width() - dataL ) / 2},${0})`
+              return `translate(${0},${0})`
             });
 
 function monthPath(t0) {
