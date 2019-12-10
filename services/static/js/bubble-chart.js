@@ -1,6 +1,6 @@
 var yourVlSpec = {
   $schema: "https://vega.github.io/schema/vega-lite/v4.json",
-  title: "Seattle Weather, 2012-2015",
+  title: "Costos de Laboratorios",
   data: {
     url: "/laboratory-data.csv"
   },
@@ -9,11 +9,10 @@ var yourVlSpec = {
       encoding: {
         color: {
           condition: {
-            title: "Weather",
-            field: "weather",
+            title: "Laboratorios",
+            field: "codigo_laboratorio",
             scale: {
-              domain: ['ABT', 'BOE', 'BQF', 'BTS', 'CHV', 'CSL', 'GFR', 'GFRU', 'IDF', 'JAC', 'LST', 'MCK', 'MDH', 'NNK', 'NOV', 'NVM', 'PAS', 'PFI', 'PRO', 'RCH', 'ROP', 'SDZ', 'SFI', 'SPA', 'TEC'],
-              range: ["#e7ba52", "#a7a7a7", "#aec7e8", "#1f77b4", "#9467bd", "#e7ba52", "#a7a7a7", "#aec7e8", "#1f77b4", "#9467bd", "#e7ba52", "#a7a7a7", "#aec7e8", "#1f77b4", "#9467bd", "#e7ba52", "#a7a7a7", "#aec7e8", "#1f77b4", "#9467bd", "#e7ba52", "#a7a7a7", "#aec7e8", "#1f77b4", "#9467bd"]
+              "scheme": "category20b"
             },
             selection: "brush",
             type: "nominal"
@@ -21,22 +20,21 @@ var yourVlSpec = {
           value: "lightgray"
         },
         size: {
-          title: "Precipitation",
-          field: "precipitation",
-          scale: {"domain": [-1, 50]},
+          title: "Cantidad Prescipciones",
+          field: "cantidad_prescripciones",
+          scale: {"domain": [0, 200]},
           type: "quantitative"
         },
         x: {
           axis: {"title": "Date", "format": "%b"},
-          field: "date",
-            scale: {"domain": [2017, 2019]},
+          field: "fecha_prescipcion_amd",
           timeUnit: "monthdate",
           type: "temporal"
         },
         y: {
-          axis: {"title": "Maximum Daily Temperature (C)"},
-          field: "temp_max",
-          scale: {"domain": [-5, 40]},
+          axis: {"title": "Costos Asociados"},
+          field: "Valor_Medio",
+          scale: {"domain": [0, 10000000]},
           type: "quantitative"
         }
       },
@@ -50,10 +48,9 @@ var yourVlSpec = {
       encoding: {
         color: {
           condition: {
-            field: "weather",
+            field: "codigo_laboratorio",
             scale: {
-              domain: ['ABT', 'BOE', 'BQF', 'BTS', 'CHV', 'CSL', 'GFR', 'GFRU', 'IDF', 'JAC', 'LST', 'MCK', 'MDH', 'NNK', 'NOV', 'NVM', 'PAS', 'PFI', 'PRO', 'RCH', 'ROP', 'SDZ', 'SFI', 'SPA', 'TEC'],
-              range: ["#e7ba52", "#a7a7a7", "#aec7e8", "#1f77b4", "#9467bd", "#e7ba52", "#a7a7a7", "#aec7e8", "#1f77b4", "#9467bd", "#e7ba52", "#a7a7a7", "#aec7e8", "#1f77b4", "#9467bd", "#e7ba52", "#a7a7a7", "#aec7e8", "#1f77b4", "#9467bd", "#e7ba52", "#a7a7a7", "#aec7e8", "#1f77b4", "#9467bd"]
+                "scheme": "category20b"
             },
             selection: "click",
             type: "nominal"
@@ -61,7 +58,7 @@ var yourVlSpec = {
           value: "lightgray"
         },
         x: {"aggregate": "count", "type": "quantitative"},
-        y: {"title": "Weather", "field": "weather", "type": "nominal"}
+        y: {"title": "Laboratorios", "field": "codigo_laboratorio", "type": "nominal"}
       },
       width: 900,
       mark: "bar",

@@ -87,16 +87,13 @@ def hierarchy_data():
 def laboratory_data():
 
     query = ("select " +
-            "fecha_prescipcion_amd 'date',  " +
-            "(sum(Valor_Medio))/1000  'precipitation',  " +
-            "(sum(Valor_Medio) + 1000)/1000 'emp_max', " +
-            "(sum(Valor_Medio) - 1000)/1000 'temp_min', " +
-            "count(Valor_Medio) 'wind', " +
-            "codigo_laboratorio 'weather'  " +
+            "fecha_prescipcion_amd 'fecha_prescipcion_amd',  " +
+            "count(codigo_laboratorio)  'cantidad_prescripciones',  " +
+            "sum(Valor_Medio) 'Valor_Medio', " +
+            "codigo_laboratorio 'codigo_laboratorio'  " +
         "from MDCMNTS_PCNTS_LTCST  " +
-        "where fecha_prescipcion_amd BETWEEN '2018/01/01' and '2018/12/31' " +
         "group by fecha_prescipcion_amd, codigo_laboratorio " +
-        "order by Fecha_Prescipcion_amd limit 500;")
+        "order by Fecha_Prescipcion_amd ;")
 
     return execute_query(query)
 
