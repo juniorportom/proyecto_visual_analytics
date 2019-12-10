@@ -58,8 +58,8 @@ var yourVlSpec = {
           },
           value: "lightgray"
         },
-        x: {"aggregate": "count", "type": "quantitative"},
-        y: {"title": "Laboratorios", "field": "codigo_laboratorio", "type": "nominal"}
+        x: {"title": "Prescripciones", "aggregate": "count", "type": "quantitative"},
+        y: {"title": "Laboratorios", "field": "codigo_laboratorio", "type": "nominal", "sort": "-x"}
       },
       width: 900,
       mark: {"type": "bar", "tooltip": true},
