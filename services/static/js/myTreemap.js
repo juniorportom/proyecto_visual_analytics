@@ -1,13 +1,11 @@
 /* global d3 */
 
 function myTreemap(width, treeData) {
-  const color = d3.scaleOrdinal(
-    d3.quantize(d3.interpolateRainbow, Math.floor(treeData.length / 2))
-  );
+  const color = d3.scaleOrdinal(d3.schemeTableau10)
   const format = d3.format("$,.2s");
   const layout = d3
     .treemap()
-    .tile(d3.treemapSquarify)
+    .tile(d3.treemapBinary)
     .size([width, (width * 3) / 4])
     .round(true)
     .paddingInner(1);
@@ -18,7 +16,7 @@ function myTreemap(width, treeData) {
         d => d.values
       )
       .eachBefore(d => {
-        d.data.name = d.children ? d.data.key : d.data.Categoria_Medicamento;
+        d.data.name = d.children ? d.data.key : d.data.name;
         // d.data.name = d.data.name.toLowerCase();
         d.data.id = (d.parent ? d.parent.data.id + "." : "") + d.data.name;
       })
@@ -146,7 +144,7 @@ function myTreemap(width, treeData) {
     .append("use")
     .attr("xlink:href", d => d.leafUid.href);
 
-  innerNodes
+  /*innerNodes
     .append("text")
     .attr("clip-path", d => d.clipUid)
     .attr("y", d => (d.depth === 1 ? 30 : (d.y1 - d.y0) / 2))
@@ -156,7 +154,7 @@ function myTreemap(width, treeData) {
     .attr("fill-opacity", 0.3)
     .style("stroke", "white")
     .style("stroke-width", d => (d.depth === 1 ? 1 : 0.5))
-    .text(d => d.data.name);
+    .text(d => d.data.name);*/
 
   return svg.node();
 }
