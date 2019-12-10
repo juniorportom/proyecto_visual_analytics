@@ -62,7 +62,7 @@ var yourVlSpec = {
         y: {"title": "Laboratorios", "field": "codigo_laboratorio", "type": "nominal"}
       },
       width: 900,
-      mark: "bar",
+      mark: {"type": "bar", "tooltip": true},
       selection: {"click": {"encodings": ["color"], "type": "multi"}},
       transform: [{"filter": {"selection": "brush"}}]
     }
