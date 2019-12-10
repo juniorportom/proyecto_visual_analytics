@@ -24,6 +24,11 @@ def personal_data():
         "SELECT MDCMNTS_PCNTS_LTCST.Fecha_Prescipcion_amd AS Date, MDCMNTS_PCNTS_LTCST.Medicamento AS Comparison_Type, MDCMNTS_PCNTS_LTCST.Cod_Diagnostico, MDCMNTS_PCNTS_LTCST.Nombre_Diag FROM MDCMNTS_PCNTS_LTCST WHERE MDCMNTS_PCNTS_LTCST.Numero_Documento = '1121926922' ORDER BY Date ASC")
     return execute_query(query)
 
+@app.route('/personal-data-info')
+def personal_data_info():
+    query = ("SELECT 'Usuaria de Prueba' as User, CAST((julianday() - julianday(Fecha_Nacimiento_amd)) / 365 as INTEGER) AS Edad, sum(cast(Valor_Medio as decimal (14,0))) as Costo, Fuerza, Sexo FROM MDCMNTS_PCNTS_LTCST WHERE MDCMNTS_PCNTS_LTCST.Numero_Documento = '1121926922'")
+    return json_execute_query(query)
+
 
 @app.route('/personal-datatable')
 def datatable():

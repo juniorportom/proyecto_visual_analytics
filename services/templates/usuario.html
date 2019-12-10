@@ -20,7 +20,22 @@
     <div class="card-deck mb-3 text-center">
         <div class="card mb-12 shadow-sm">
             <div class="card-header">
-                <h4 class="my-0 font-weight-normal">Prescripción Individual de Medicamentos de Alto Costo </h4>
+                <h5 id="username" class="my-0 font-weight-normal"></h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3"><strong>SEXO: </strong><span id="user_sex"></span></div>
+                    <div class="col-md-3"><strong>EDAD: </strong><span id="user_years"></span></div>
+                    <div class="col-md-3"><strong>FUERZA: </strong><span id="user_force"></span></div>
+                    <div class="col-md-3"><strong>COSTO TOTAL: </strong><span id="user_total"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-deck mb-3 text-center">
+        <div class="card mb-12 shadow-sm">
+            <div class="card-header">
+                <h5 class="my-0 font-weight-normal">Prescripción Individual de Medicamentos de Alto Costo </h5>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -33,7 +48,7 @@
     <div class="card-deck mb-3 text-center">
         <div class="card mb-12 shadow-sm">
             <div class="card-header">
-                <h4 class="my-0 font-weight-normal">Personal quien prescribió los Medicamentos </h4>
+                <h5 class="my-0 font-weight-normal">Personal quien prescribió los Medicamentos </h5>
             </div>
             <div class="card-body">
                 <table id="table_id" class="display">
@@ -74,6 +89,16 @@
 <script src="/static/js/calendermap.js"></script>
 <script>
     $(document).ready(function () {
+
+        $.get('/personal-data-info', function (data) {
+            user_info = data[0];
+            $('#username').html('Paciente: ' + user_info[0])
+            $('#user_sex').html(user_info[4])
+            $('#user_force').html(user_info[3])
+            $('#user_years').html(user_info[1])
+            $('#user_total').html(formatValue(user_info[2]))
+        });
+
         $('#table_id').DataTable({
             ajax: {
                 url: '/personal-datatable',
