@@ -1,4 +1,4 @@
-from flask import Flask, make_response, render_template, request
+from flask import Flask, make_response, render_template, request, json
 import sqlite3
 import io
 import csv
@@ -17,10 +17,18 @@ def home():
 def user():
     return render_template('usuario.html')
 
+
 @app.route('/personal-data')
 def personal_data():
-    query = ("SELECT MDCMNTS_PCNTS_LTCST.Fecha_Prescipcion_amd AS Date, MDCMNTS_PCNTS_LTCST.Medicamento AS Comparison_Type, MDCMNTS_PCNTS_LTCST.Cod_Diagnostico, MDCMNTS_PCNTS_LTCST.Nombre_Diag FROM MDCMNTS_PCNTS_LTCST WHERE MDCMNTS_PCNTS_LTCST.Numero_Documento = '1121926922' ORDER BY Date ASC")
+    query = (
+        "SELECT MDCMNTS_PCNTS_LTCST.Fecha_Prescipcion_amd AS Date, MDCMNTS_PCNTS_LTCST.Medicamento AS Comparison_Type, MDCMNTS_PCNTS_LTCST.Cod_Diagnostico, MDCMNTS_PCNTS_LTCST.Nombre_Diag FROM MDCMNTS_PCNTS_LTCST WHERE MDCMNTS_PCNTS_LTCST.Numero_Documento = '1121926922' ORDER BY Date ASC")
     return execute_query(query)
+
+
+@app.route('/personal-datatable')
+def datatable():
+    query = ("SELECT MDCMNTS_PCNTS_LTCST.Fecha_Prescipcion_amd AS Date, MDCMNTS_PCNTS_LTCST.Nombre_Medico, MDCMNTS_PCNTS_LTCST.Tipo_Consulta FROM MDCMNTS_PCNTS_LTCST WHERE MDCMNTS_PCNTS_LTCST.Numero_Documento = 1121926922 GROUP BY MDCMNTS_PCNTS_LTCST.Fecha_Prescipcion_amd ORDER BY Date ASC")
+    return json_execute_query(query)
 
 
 @app.route('/categories-data')
@@ -108,6 +116,7 @@ def hierarchy_data():
 
     return execute_query(query)
 
+
 @app.route('/laboratory-data.csv')
 def laboratory_data():
     query = ("select " +
@@ -120,6 +129,7 @@ def laboratory_data():
              "order by Fecha_Prescipcion_amd ;")
 
     return execute_query(query)
+
 
 def execute_query(query):
     conn = sqlite3.connect(DATABASE_FILE)
@@ -136,6 +146,17 @@ def execute_query(query):
 
     return output
 
+
+def json_execute_query(query):
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+    data = cursor.execute(query)
+    response = app.response_class(
+        response=json.dumps(list(data)),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
 
 if __name__ == '__main__':
     app.run()
